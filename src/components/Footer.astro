@@ -1,0 +1,90 @@
+---
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/gitplum-icon.svg" alt="Gitplum" height="24" width="24" />
+      <div class="footer-info">
+        <span class="footer-tagline">The intelligence layer for the world's code.</span>
+        <span class="footer-copy">&copy; 2026 Instalabs, LLC. All rights reserved.</span>
+      </div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/privacy">Privacy</a></li>
+      <li><a href="/terms">Terms</a></li>
+      <li><a href="https://github.com/gitplum/gitplum">GitHub</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 48px 24px 36px;
+    border-top: 1px solid var(--border);
+    background: var(--white);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .footer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .footer-tagline {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #999;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: var(--plum);
+  }
+
+  @media (max-width: 640px) {
+    .footer-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .footer-brand {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+</style>

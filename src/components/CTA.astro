@@ -1,0 +1,50 @@
+---
+---
+
+<section class="launch">
+  <div class="launch-inner fade-in">
+    <div class="launch-badge">
+      <span class="launch-pulse"></span>
+      Gitplum is currently in deep-indexing mode. Launching 2026.
+    </div>
+  </div>
+</section>
+
+<style>
+  .launch {
+    padding: 80px 24px 100px;
+    text-align: center;
+  }
+
+  .launch-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .launch-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 28px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-family: var(--mono);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .launch-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--plum-light);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+</style>

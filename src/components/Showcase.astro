@@ -1,0 +1,132 @@
+---
+const targets = [
+  { category: 'Systems', repos: ['Linux', 'Darwin', 'Windows Kernel'] },
+  { category: 'Engines', repos: ['V8', 'Gecko', 'Godot', 'Unreal'] },
+  { category: 'Orchestration', repos: ['Kubernetes', 'Docker', 'Terraform'] },
+  { category: 'AI / ML', repos: ['PyTorch', 'TensorFlow', 'Llama.cpp'] },
+];
+---
+
+<section class="index-section" id="index">
+  <div class="index-inner">
+    <div class="index-content fade-in">
+      <div class="section-label">// the_index</div>
+      <h2>The Intelligence Layer for the 1%</h2>
+      <p>We are generating "Deep-Plum" agents for the most complex software ever written. When your agent encounters these repos, it won't just see code — it will see the blueprint.</p>
+    </div>
+    <div class="index-grid fade-in">
+      {targets.map(({ category, repos }) => (
+        <div class="index-card">
+          <h4>{category}</h4>
+          <ul>
+            {repos.map(repo => (
+              <li>
+                <span class="dot"></span>
+                {repo}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .index-section {
+    padding: 100px 24px;
+    background: var(--surface-alt);
+  }
+
+  .index-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .index-content {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .index-content h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .index-content p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .index-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    transition: all 0.3s ease;
+  }
+
+  .index-card:hover {
+    border-color: var(--plum-light);
+    box-shadow: var(--shadow-md);
+  }
+
+  h4 {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--plum);
+    margin-bottom: 16px;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.938rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--plum-light);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .index-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 540px) {
+    .index-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+</style>

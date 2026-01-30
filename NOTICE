@@ -1,0 +1,30 @@
+Gitplum — The Knowledge Base for Software
+Copyright 2026 Instalabs, LLC. All rights reserved.
+
+NOTICE OF INTENT
+
+This repository contains the source code for the Gitplum public website.
+The documentation content and static site source code in this repository
+are licensed under the Apache License, Version 2.0.
+
+The following elements are proprietary and are NOT covered by the
+open-source license:
+
+  1. BRANDING — The "Gitplum" name, logos, icons, and all associated
+     visual identity assets are trademarks of Instalabs, LLC. Use of
+     these marks requires prior written permission.
+
+  2. API & SERVICES — The Gitplum API, backend services, and knowledge
+     generation engine are proprietary software owned by Instalabs, LLC
+     and are not included in this repository.
+
+  3. GENERATED CONTENT — Any content produced by the Gitplum platform
+     or generation engine remains subject to Instalabs, LLC's terms of
+     service.
+
+You may fork and modify this repository for personal or educational use.
+You may NOT use the Gitplum name, logo, or branding to present a
+derivative work as an official Gitplum product or service without
+explicit authorization from Instalabs, LLC.
+
+For licensing inquiries, contact: legal@gitplum.com

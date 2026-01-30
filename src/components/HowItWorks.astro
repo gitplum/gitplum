@@ -1,0 +1,133 @@
+---
+---
+
+<section class="preview" id="preview">
+  <div class="preview-inner">
+    <div class="preview-text fade-in">
+      <div class="section-label">// how_it_works</div>
+      <h2>Ask anything. About any repo.</h2>
+      <p>Your agent has a question about an unfamiliar codebase — the kind no Google search or README can answer. Gitplum resolves it in seconds, with real sources.</p>
+      <ul class="preview-list">
+        <li>
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          Deep architectural questions, answered instantly
+        </li>
+        <li>
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          Pinpoints exact files and line numbers
+        </li>
+        <li>
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          Any public or private repository on earth
+        </li>
+        <li>
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          Works with any agent framework or model
+        </li>
+      </ul>
+    </div>
+    <div class="preview-code fade-in">
+      <div class="terminal">
+        <div class="terminal-header">
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+          <span class="terminal-title">gitplum ask — kubernetes/kubernetes</span>
+        </div>
+        <div class="terminal-body">
+          <span class="t-muted">$</span> <span class="t-cmd">gitplum ask</span> kubernetes/kubernetes<br />
+          <span class="t-white">"When a pod is evicted due to node memory</span><br />
+          <span class="t-white">&nbsp;pressure, how does the kubelet decide</span><br />
+          <span class="t-white">&nbsp;which pods to kill first?"</span><br /><br />
+          <span class="t-muted">[resolving]</span> Analyzing kubernetes/kubernetes...<br /><br />
+          <span class="t-green">&#10003;</span> <span class="t-white">The kubelet uses an eviction manager that ranks</span><br />
+          <span class="t-white">&nbsp;&nbsp;pods by QoS class (BestEffort → Burstable →</span><br />
+          <span class="t-white">&nbsp;&nbsp;Guaranteed), then by memory usage relative to</span><br />
+          <span class="t-white">&nbsp;&nbsp;their requests. BestEffort pods exceeding usage</span><br />
+          <span class="t-white">&nbsp;&nbsp;are evicted first.</span><br /><br />
+          <span class="t-muted">[source]</span> <span class="t-plum">pkg/kubelet/eviction/helpers.go:214</span><br />
+          <span class="t-muted">[source]</span> <span class="t-plum">pkg/kubelet/eviction/eviction_manager.go:387</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .preview {
+    padding: 100px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .preview-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .preview-text h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .preview-text p {
+    font-size: 1.063rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .preview-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .preview-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.975rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .preview-list li svg {
+    flex-shrink: 0;
+    color: var(--plum);
+    margin-top: 2px;
+  }
+
+  .preview-code pre {
+    margin: 0;
+    white-space: pre;
+  }
+
+  .preview-code code {
+    font-family: var(--mono);
+    font-size: 0.813rem;
+    line-height: 1.9;
+  }
+
+  .t-cmd { color: #fff; font-weight: 600; }
+  .t-plum { color: #C084FC; }
+  .t-green { color: #4ADE80; }
+  .t-white { color: #E4E4E7; }
+  .t-muted { color: #52525B; }
+
+  @media (max-width: 900px) {
+    .preview-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .preview-code {
+      order: -1;
+    }
+  }
+</style>

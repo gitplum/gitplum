@@ -1,0 +1,165 @@
+---
+---
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-logo">
+      <img src="/gitplum-logo.svg" alt="Gitplum" height="64" />
+    </div>
+    <div class="hero-badge">
+      <span class="badge-pulse"></span>
+      Gitplum is currently in deep-indexing mode. Launching 2026.
+    </div>
+    <h1>The Knowledge Base<br />for <span>Software.</span></h1>
+    <p>Gitplum transforms how coding agents discover, understand, and share software knowledge. Real-time intelligence for the world's code.</p>
+    <div class="hero-actions">
+      <a href="#preview" class="btn btn-outline btn-large">See How It Works</a>
+    </div>
+  </div>
+
+  <div class="hero-terminal fade-in">
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="terminal-dot"></span>
+        <span class="terminal-dot"></span>
+        <span class="terminal-dot"></span>
+        <span class="terminal-title">agent-context — gitplum</span>
+      </div>
+      <div class="terminal-body">
+        <span class="t-muted">$</span> <span class="t-cmd">gitplum ask</span> vercel/next.js<br />
+        <span class="t-white">"How does the App Router resolve parallel routes</span><br />
+        <span class="t-white">&nbsp;when a layout has both @modal and @sidebar slots</span><br />
+        <span class="t-white">&nbsp;with conflicting loading states?"</span><br /><br />
+        <span class="t-muted">[resolving]</span> Analyzing vercel/next.js routing internals...<br />
+        <span class="t-muted">[source]</span> <span class="t-plum">packages/next/src/server/app-render/walk-tree-with-flush.tsx</span><br />
+        <span class="t-muted">[source]</span> <span class="t-plum">packages/next/src/server/app-render/create-component-tree.tsx</span><br /><br />
+        <span class="t-green">&#10003;</span> <span class="t-white">Parallel routes resolve independently. Each slot renders</span><br />
+        <span class="t-white">&nbsp;&nbsp;its own loading.tsx boundary. Conflicts are handled by the</span><br />
+        <span class="t-white">&nbsp;&nbsp;innermost layout — @modal takes precedence only when its</span><br />
+        <span class="t-white">&nbsp;&nbsp;route segment matches. See walk-tree-with-flush.tsx:142.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 160px 24px 80px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--white) 0%, var(--surface-alt) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, var(--plum-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-logo {
+    margin: 0 auto 28px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 18px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--plum);
+    margin-bottom: 28px;
+  }
+
+  .badge-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--plum-light);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  h1 span {
+    background: linear-gradient(135deg, var(--plum) 0%, var(--plum-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1.188rem;
+    color: var(--text-secondary);
+    max-width: 620px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 72px;
+  }
+
+  .hero-terminal {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .t-cmd { color: #fff; font-weight: 600; }
+  .t-flag { color: #93C5FD; }
+  .t-plum { color: #C084FC; }
+  .t-green { color: #4ADE80; }
+  .t-white { color: #E4E4E7; }
+  .t-muted { color: #52525B; }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 130px 20px 60px;
+    }
+
+    .hero p {
+      font-size: 1.063rem;
+    }
+
+    .hero-actions {
+      margin-bottom: 48px;
+    }
+  }
+</style>
