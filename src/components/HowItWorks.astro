@@ -2,32 +2,8 @@
 ---
 
 <section class="preview" id="preview" aria-label="How Gitplum works">
-  <!-- Network lines background -->
-  <div class="network-bg" aria-hidden="true">
-    <svg class="network-svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Connection lines -->
-      <line x1="100" y1="120" x2="340" y2="280" class="net-line nl-1" />
-      <line x1="340" y1="280" x2="580" y2="180" class="net-line nl-2" />
-      <line x1="580" y1="180" x2="820" y2="350" class="net-line nl-3" />
-      <line x1="820" y1="350" x2="1050" y2="220" class="net-line nl-4" />
-      <line x1="200" y1="450" x2="480" y2="520" class="net-line nl-5" />
-      <line x1="480" y1="520" x2="720" y2="420" class="net-line nl-6" />
-      <line x1="720" y1="420" x2="980" y2="550" class="net-line nl-7" />
-      <line x1="340" y1="280" x2="480" y2="520" class="net-line nl-8" />
-      <line x1="580" y1="180" x2="720" y2="420" class="net-line nl-9" />
-      <line x1="820" y1="350" x2="980" y2="550" class="net-line nl-10" />
-      <!-- Nodes -->
-      <circle cx="100" cy="120" r="4" class="net-node nn-1" />
-      <circle cx="340" cy="280" r="5" class="net-node nn-2" />
-      <circle cx="580" cy="180" r="4" class="net-node nn-3" />
-      <circle cx="820" cy="350" r="6" class="net-node nn-4" />
-      <circle cx="1050" cy="220" r="4" class="net-node nn-5" />
-      <circle cx="200" cy="450" r="3" class="net-node nn-6" />
-      <circle cx="480" cy="520" r="5" class="net-node nn-7" />
-      <circle cx="720" cy="420" r="4" class="net-node nn-8" />
-      <circle cx="980" cy="550" r="3" class="net-node nn-9" />
-    </svg>
-  </div>
+  <!-- Circuit flow canvas background -->
+  <canvas class="circuit-canvas" id="circuitCanvas" aria-hidden="true"></canvas>
   <div class="preview-inner">
     <div class="preview-text fade-in">
       <div class="section-label">// how_it_works</div>
@@ -88,74 +64,14 @@
     overflow: hidden;
   }
 
-  /* ── Network Connection Lines ── */
-  .network-bg {
+  /* ── Circuit Flow Canvas ── */
+  .circuit-canvas {
     position: absolute;
     inset: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .network-svg {
     width: 100%;
     height: 100%;
-    position: absolute;
-    inset: 0;
-  }
-
-  .net-line {
-    stroke: rgba(107, 45, 139, 0.08);
-    stroke-width: 1;
-    stroke-dasharray: 6 8;
-  }
-
-  .net-node {
-    fill: rgba(139, 77, 171, 0.15);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .net-line {
-      animation: dashScroll 12s linear infinite;
-    }
-    .nl-1  { animation-delay: 0s; }
-    .nl-2  { animation-delay: -1.5s; }
-    .nl-3  { animation-delay: -3s; }
-    .nl-4  { animation-delay: -4.5s; }
-    .nl-5  { animation-delay: -6s; }
-    .nl-6  { animation-delay: -7.5s; }
-    .nl-7  { animation-delay: -9s; }
-    .nl-8  { animation-delay: -2s; }
-    .nl-9  { animation-delay: -5s; }
-    .nl-10 { animation-delay: -8s; }
-
-    .net-node {
-      animation: nodePulse 4s ease-in-out infinite;
-    }
-    .nn-1 { animation-delay: 0s; }
-    .nn-2 { animation-delay: -0.5s; }
-    .nn-3 { animation-delay: -1s; }
-    .nn-4 { animation-delay: -1.5s; }
-    .nn-5 { animation-delay: -2s; }
-    .nn-6 { animation-delay: -2.5s; }
-    .nn-7 { animation-delay: -3s; }
-    .nn-8 { animation-delay: -3.5s; }
-    .nn-9 { animation-delay: -0.8s; }
-  }
-
-  @keyframes dashScroll {
-    0% { stroke-dashoffset: 0; }
-    100% { stroke-dashoffset: -56; }
-  }
-
-  @keyframes nodePulse {
-    0%, 100% {
-      opacity: 0.3;
-      r: inherit;
-    }
-    50% {
-      opacity: 0.7;
-      fill: rgba(192, 132, 252, 0.3);
-    }
+    pointer-events: none;
+    z-index: 0;
   }
 
   .preview-inner {
@@ -240,3 +156,180 @@
     }
   }
 </style>
+
+<script>
+  // Neural network: drifting nodes that connect when near each other
+  (function initNeural() {
+    const canvas = document.getElementById('circuitCanvas') as HTMLCanvasElement;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let w: number, h: number;
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      w = rect.width;
+      h = rect.height;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    interface Neuron {
+      x: number; y: number;
+      vx: number; vy: number;
+      radius: number;
+      pulsePhase: number;
+      pulseSpeed: number;
+    }
+
+    const connectionDist = 160;
+    const nodeCount = 40;
+    const neurons: Neuron[] = [];
+
+    for (let i = 0; i < nodeCount; i++) {
+      neurons.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        radius: 1.5 + Math.random() * 1.5,
+        pulsePhase: Math.random() * Math.PI * 2,
+        pulseSpeed: 0.5 + Math.random() * 0.8,
+      });
+    }
+
+    // Traveling pulses along active connections
+    interface Pulse {
+      from: number; to: number;
+      t: number; speed: number;
+    }
+    const pulses: Pulse[] = [];
+
+    let time = 0;
+    let animId: number;
+
+    function draw() {
+      time += 0.016;
+      ctx!.clearRect(0, 0, w, h);
+
+      // Move neurons
+      for (const n of neurons) {
+        n.x += n.vx;
+        n.y += n.vy;
+        // Bounce off edges with padding
+        if (n.x < -30) n.vx = Math.abs(n.vx);
+        if (n.x > w + 30) n.vx = -Math.abs(n.vx);
+        if (n.y < -30) n.vy = Math.abs(n.vy);
+        if (n.y > h + 30) n.vy = -Math.abs(n.vy);
+      }
+
+      // Draw connections between nearby neurons
+      for (let i = 0; i < neurons.length; i++) {
+        for (let j = i + 1; j < neurons.length; j++) {
+          const a = neurons[i], b = neurons[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < connectionDist) {
+            const alpha = (1 - dist / connectionDist) * 0.08;
+            ctx!.strokeStyle = `rgba(139, 77, 171, ${alpha})`;
+            ctx!.lineWidth = 0.6;
+            ctx!.beginPath();
+            ctx!.moveTo(a.x, a.y);
+            ctx!.lineTo(b.x, b.y);
+            ctx!.stroke();
+          }
+        }
+      }
+
+      // Draw neurons
+      for (const n of neurons) {
+        const pulse = 0.5 + 0.5 * Math.sin(time * n.pulseSpeed + n.pulsePhase);
+        const alpha = 0.06 + 0.06 * pulse;
+
+        // Outer glow
+        const grad = ctx!.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.radius * 5);
+        grad.addColorStop(0, `rgba(192, 132, 252, ${alpha * 0.5})`);
+        grad.addColorStop(1, 'rgba(192, 132, 252, 0)');
+        ctx!.fillStyle = grad;
+        ctx!.beginPath();
+        ctx!.arc(n.x, n.y, n.radius * 5, 0, Math.PI * 2);
+        ctx!.fill();
+
+        // Core
+        ctx!.beginPath();
+        ctx!.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+        ctx!.fillStyle = `rgba(139, 77, 171, ${alpha * 1.5})`;
+        ctx!.fill();
+      }
+
+      // Spawn pulses occasionally
+      if (Math.random() < 0.04 && pulses.length < 8) {
+        const i = Math.floor(Math.random() * neurons.length);
+        // Find a nearby neuron
+        for (let j = 0; j < neurons.length; j++) {
+          if (j === i) continue;
+          const dx = neurons[i].x - neurons[j].x;
+          const dy = neurons[i].y - neurons[j].y;
+          if (Math.sqrt(dx * dx + dy * dy) < connectionDist) {
+            pulses.push({ from: i, to: j, t: 0, speed: 0.015 + Math.random() * 0.02 });
+            break;
+          }
+        }
+      }
+
+      // Draw pulses
+      for (let p = pulses.length - 1; p >= 0; p--) {
+        const pulse = pulses[p];
+        pulse.t += pulse.speed;
+        if (pulse.t >= 1) { pulses.splice(p, 1); continue; }
+
+        const a = neurons[pulse.from], b = neurons[pulse.to];
+        const px = a.x + (b.x - a.x) * pulse.t;
+        const py = a.y + (b.y - a.y) * pulse.t;
+        const glow = Math.sin(pulse.t * Math.PI);
+
+        // Pulse glow
+        const g = ctx!.createRadialGradient(px, py, 0, px, py, 6);
+        g.addColorStop(0, `rgba(192, 132, 252, ${glow * 0.2})`);
+        g.addColorStop(1, 'rgba(192, 132, 252, 0)');
+        ctx!.fillStyle = g;
+        ctx!.beginPath();
+        ctx!.arc(px, py, 6, 0, Math.PI * 2);
+        ctx!.fill();
+
+        // Bright core
+        ctx!.beginPath();
+        ctx!.arc(px, py, 1.5, 0, Math.PI * 2);
+        ctx!.fillStyle = `rgba(255, 255, 255, ${glow * 0.3})`;
+        ctx!.fill();
+      }
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        animId = requestAnimationFrame(draw);
+      } else {
+        cancelAnimationFrame(animId);
+      }
+    }, { threshold: 0.05 });
+    observer.observe(canvas);
+
+    window.addEventListener('resize', () => {
+      resize();
+      // Reposition neurons within new bounds
+      for (const n of neurons) {
+        n.x = Math.min(n.x, w);
+        n.y = Math.min(n.y, h);
+      }
+    });
+  })();
+</script>
