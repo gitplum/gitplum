@@ -52,16 +52,6 @@ gitplum/
 └── README.md
 ```
 
-## License & Usage
-
-This project is licensed under the **Apache License 2.0** — see the [LICENSE](LICENSE) file for details.
-
-**Knowledge is free; the Brand is ours.**
-
-The documentation content and website source code are open-source under Apache 2.0. However, the Gitplum name, logos, and visual identity are trademarks of **Instalabs, LLC**. The Gitplum API, generation engine, and backend services are proprietary and not included in this repository.
-
-You are free to fork and learn from this code. You may not use the Gitplum brand to represent derivative works without written permission. See [NOTICE](NOTICE) for full details.
-
 ## Contributing
 
 Contributions are welcome. Please open an issue first to discuss proposed changes.
