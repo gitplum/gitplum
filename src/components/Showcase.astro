@@ -1,22 +1,22 @@
 ---
 const targets = [
-  { category: 'Systems', repos: ['Linux', 'Darwin', 'Windows Kernel'] },
-  { category: 'Engines', repos: ['V8', 'Gecko', 'Godot', 'Unreal'] },
-  { category: 'Orchestration', repos: ['Kubernetes', 'Docker', 'Terraform'] },
-  { category: 'AI / ML', repos: ['PyTorch', 'TensorFlow', 'Llama.cpp'] },
+  { category: 'Systems', repos: ['Linux', 'Darwin', 'Windows Kernel'], status: 'indexing' },
+  { category: 'Engines', repos: ['V8', 'Gecko', 'Godot', 'Unreal'], status: 'indexing' },
+  { category: 'Orchestration', repos: ['Kubernetes', 'Docker', 'Terraform'], status: 'indexing' },
+  { category: 'AI / ML', repos: ['PyTorch', 'TensorFlow', 'Llama.cpp'], status: 'indexing' },
 ];
 ---
 
-<section class="index-section" id="index">
+<section class="index-section" id="index" aria-label="Deep-indexed repositories">
   <div class="index-inner">
     <div class="index-content fade-in">
       <div class="section-label">// the_index</div>
-      <h2>The Intelligence Layer for the 1%</h2>
-      <p>We are generating "Deep-Plum" agents for the most complex software ever written. When your agent encounters these repos, it won't just see code — it will see the blueprint.</p>
+      <h2>Deep context for <em>the hardest software on earth.</em></h2>
+      <p>Gitplum is deep-indexing the most complex open-source software. When your agent encounters these repos, the knowledge base delivers the full architectural blueprint — not a surface scan.</p>
     </div>
     <div class="index-grid fade-in">
       {targets.map(({ category, repos }) => (
-        <div class="index-card">
+        <article class="index-card">
           <h3>{category}</h3>
           <ul>
             {repos.map(repo => (
@@ -26,7 +26,7 @@ const targets = [
               </li>
             ))}
           </ul>
-        </div>
+        </article>
       ))}
     </div>
   </div>
@@ -34,13 +34,27 @@ const targets = [
 
 <style>
   .index-section {
-    padding: 100px 24px;
+    padding: 120px 24px;
     background: var(--surface-alt);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .index-section::before {
+    content: '';
+    position: absolute;
+    bottom: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(107, 45, 139, 0.06) 0%, transparent 70%);
+    pointer-events: none;
   }
 
   .index-inner {
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
   }
 
   .index-content {
@@ -49,10 +63,19 @@ const targets = [
   }
 
   .index-content h2 {
+    font-family: var(--sans);
     font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 800;
+    font-style: normal;
     letter-spacing: -0.02em;
     margin-bottom: 16px;
+  }
+
+  .index-content h2 em {
+    font-family: var(--display);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--plum);
   }
 
   .index-content p {
@@ -74,12 +97,13 @@ const targets = [
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     padding: 28px 24px;
-    transition: all 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .index-card:hover {
     border-color: var(--plum-light);
     box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
   }
 
   h3 {
@@ -114,6 +138,7 @@ const targets = [
     border-radius: 50%;
     background: var(--plum-light);
     flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(139, 77, 171, 0.3);
   }
 
   @media (max-width: 900px) {

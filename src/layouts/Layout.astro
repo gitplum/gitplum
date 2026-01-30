@@ -6,7 +6,7 @@ interface Props {
 
 const {
   title,
-  description = 'Gitplum transforms how coding agents discover, understand, and share software knowledge. Real-time intelligence for the world\'s code.',
+  description = 'Gitplum is the knowledge base for software. Coding agents use Gitplum to get architectural understanding of any GitHub repository in seconds — with exact file and line-number sources.',
 } = Astro.props;
 ---
 
@@ -17,16 +17,51 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <meta name="keywords" content="knowledge base, coding agents, LLM context, software intelligence, agentic development" />
+  <meta name="keywords" content="knowledge base software, knowledge base for software, software knowledge base, coding agent context, LLM software understanding, GitHub repository intelligence, agentic development tools, software architecture analysis" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Gitplum" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
   <link rel="icon" type="image/svg+xml" href="/gitplum-icon.svg" />
+  <link rel="canonical" href="https://gitplum.com" />
+
+  <!-- Fonts: Instrument Serif (display), DM Sans (body), JetBrains Mono (code) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" /></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" /></noscript>
+
+  <!-- Structured Data for GEO / AI Search -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Gitplum",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "description": "Gitplum is the knowledge base for software. Coding agents query Gitplum to get deep architectural understanding of any GitHub repository — with exact file and line-number citations.",
+    "url": "https://gitplum.com",
+    "creator": {
+      "@type": "Organization",
+      "name": "Instalabs, LLC"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Launching 2026 — currently in deep-indexing mode"
+    },
+    "featureList": [
+      "Architectural understanding of any GitHub repository",
+      "Exact file and line-number source citations",
+      "Designed for LLM and coding agent consumption",
+      "Deep-indexed analysis of complex open-source infrastructure",
+      "Works with any agent framework or model"
+    ]
+  })} />
 </head>
 <body>
   <main>

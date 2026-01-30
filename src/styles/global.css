@@ -10,18 +10,24 @@
   --plum-dark: #4A1D63;
   --plum-light: #8B4DAB;
   --plum-glow: rgba(107, 45, 139, 0.15);
+  --plum-deep: #2D1240;
+  --plum-mist: rgba(107, 45, 139, 0.06);
   --surface: #FAFAFA;
   --surface-alt: #F3F0F5;
   --text: #1A1A2E;
   --text-secondary: #555566;
   --white: #FFFFFF;
   --border: #E8E0ED;
+  --accent: #C084FC;
   --radius: 12px;
   --radius-lg: 20px;
-  --mono: 'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+  --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  --display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 16px rgba(107, 45, 139, 0.08);
   --shadow-lg: 0 12px 40px rgba(107, 45, 139, 0.12);
+  --shadow-glow: 0 0 60px rgba(107, 45, 139, 0.18);
 }
 
 html {
@@ -29,11 +35,12 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--sans);
   color: var(--text);
   background: var(--white);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ── Buttons ── */
@@ -46,21 +53,23 @@ body {
   font-size: 0.938rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   border: none;
   font-family: inherit;
+  letter-spacing: -0.01em;
 }
 
 .btn-primary {
   background: var(--plum);
   color: var(--white);
+  box-shadow: 0 2px 8px rgba(107, 45, 139, 0.25);
 }
 
 .btn-primary:hover {
   background: var(--plum-dark);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(107, 45, 139, 0.3);
 }
 
 .btn-outline {
@@ -70,7 +79,10 @@ body {
 }
 
 .btn-outline:hover {
-  background: var(--plum-glow);
+  background: var(--plum);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(107, 45, 139, 0.25);
 }
 
 .btn-ghost {
@@ -86,7 +98,7 @@ body {
 }
 
 .btn-large {
-  padding: 14px 32px;
+  padding: 14px 36px;
   font-size: 1rem;
   border-radius: 10px;
 }
@@ -108,8 +120,10 @@ body {
 }
 
 .section-header h2 {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
+  font-family: var(--display);
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 400;
+  font-style: italic;
   letter-spacing: -0.02em;
   margin-bottom: 16px;
 }
@@ -124,10 +138,10 @@ body {
 
 /* ── Terminal ── */
 .terminal {
-  background: #1A1A2E;
+  background: #0F0E17;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255,255,255,0.05);
 }
 
 .terminal-header {
@@ -135,7 +149,8 @@ body {
   align-items: center;
   gap: 8px;
   padding: 14px 20px;
-  background: #12121E;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .terminal-dot {
@@ -167,12 +182,27 @@ body {
 @media (prefers-reduced-motion: no-preference) {
   .fade-in {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
   }
+
+  .fade-in-delay-1 { transition-delay: 0.1s; }
+  .fade-in-delay-2 { transition-delay: 0.2s; }
+  .fade-in-delay-3 { transition-delay: 0.3s; }
+}
+
+/* ── Noise overlay for texture ── */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 0;
 }

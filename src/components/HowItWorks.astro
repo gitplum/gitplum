@@ -1,28 +1,28 @@
 ---
 ---
 
-<section class="preview" id="preview">
+<section class="preview" id="preview" aria-label="How Gitplum works">
   <div class="preview-inner">
     <div class="preview-text fade-in">
       <div class="section-label">// how_it_works</div>
-      <h2>Ask anything. About any repo.</h2>
-      <p>Your agent has a question about an unfamiliar codebase — the kind no Google search or README can answer. Gitplum resolves it in seconds, with real sources.</p>
+      <h2>One question. <em>The full picture.</em></h2>
+      <p>Your agent hits unfamiliar software. The kind where no README or Google search gives you what you need. Gitplum returns the architectural answer — with sources — in seconds.</p>
       <ul class="preview-list">
         <li>
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-          Deep architectural questions, answered instantly
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          Deep architectural questions, answered with exact citations
         </li>
         <li>
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-          Pinpoints exact files and line numbers
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          Pinpoints the specific files and line numbers
         </li>
         <li>
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-          Any public or private repository on earth
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          Works on any public or private GitHub repository
         </li>
         <li>
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
-          Works with any agent framework or model
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+          Compatible with every agent framework and model
         </li>
       </ul>
     </div>
@@ -55,7 +55,7 @@
 
 <style>
   .preview {
-    padding: 100px 24px;
+    padding: 120px 24px;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -68,10 +68,19 @@
   }
 
   .preview-text h2 {
+    font-family: var(--sans);
     font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 800;
+    font-style: normal;
     letter-spacing: -0.02em;
     margin-bottom: 16px;
+  }
+
+  .preview-text h2 em {
+    font-family: var(--display);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--plum);
   }
 
   .preview-text p {
