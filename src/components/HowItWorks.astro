@@ -2,6 +2,32 @@
 ---
 
 <section class="preview" id="preview" aria-label="How Gitplum works">
+  <!-- Network lines background -->
+  <div class="network-bg" aria-hidden="true">
+    <svg class="network-svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Connection lines -->
+      <line x1="100" y1="120" x2="340" y2="280" class="net-line nl-1" />
+      <line x1="340" y1="280" x2="580" y2="180" class="net-line nl-2" />
+      <line x1="580" y1="180" x2="820" y2="350" class="net-line nl-3" />
+      <line x1="820" y1="350" x2="1050" y2="220" class="net-line nl-4" />
+      <line x1="200" y1="450" x2="480" y2="520" class="net-line nl-5" />
+      <line x1="480" y1="520" x2="720" y2="420" class="net-line nl-6" />
+      <line x1="720" y1="420" x2="980" y2="550" class="net-line nl-7" />
+      <line x1="340" y1="280" x2="480" y2="520" class="net-line nl-8" />
+      <line x1="580" y1="180" x2="720" y2="420" class="net-line nl-9" />
+      <line x1="820" y1="350" x2="980" y2="550" class="net-line nl-10" />
+      <!-- Nodes -->
+      <circle cx="100" cy="120" r="4" class="net-node nn-1" />
+      <circle cx="340" cy="280" r="5" class="net-node nn-2" />
+      <circle cx="580" cy="180" r="4" class="net-node nn-3" />
+      <circle cx="820" cy="350" r="6" class="net-node nn-4" />
+      <circle cx="1050" cy="220" r="4" class="net-node nn-5" />
+      <circle cx="200" cy="450" r="3" class="net-node nn-6" />
+      <circle cx="480" cy="520" r="5" class="net-node nn-7" />
+      <circle cx="720" cy="420" r="4" class="net-node nn-8" />
+      <circle cx="980" cy="550" r="3" class="net-node nn-9" />
+    </svg>
+  </div>
   <div class="preview-inner">
     <div class="preview-text fade-in">
       <div class="section-label">// how_it_works</div>
@@ -58,6 +84,78 @@
     padding: 120px 24px;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── Network Connection Lines ── */
+  .network-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .network-svg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+  }
+
+  .net-line {
+    stroke: rgba(107, 45, 139, 0.08);
+    stroke-width: 1;
+    stroke-dasharray: 6 8;
+  }
+
+  .net-node {
+    fill: rgba(139, 77, 171, 0.15);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .net-line {
+      animation: dashScroll 12s linear infinite;
+    }
+    .nl-1  { animation-delay: 0s; }
+    .nl-2  { animation-delay: -1.5s; }
+    .nl-3  { animation-delay: -3s; }
+    .nl-4  { animation-delay: -4.5s; }
+    .nl-5  { animation-delay: -6s; }
+    .nl-6  { animation-delay: -7.5s; }
+    .nl-7  { animation-delay: -9s; }
+    .nl-8  { animation-delay: -2s; }
+    .nl-9  { animation-delay: -5s; }
+    .nl-10 { animation-delay: -8s; }
+
+    .net-node {
+      animation: nodePulse 4s ease-in-out infinite;
+    }
+    .nn-1 { animation-delay: 0s; }
+    .nn-2 { animation-delay: -0.5s; }
+    .nn-3 { animation-delay: -1s; }
+    .nn-4 { animation-delay: -1.5s; }
+    .nn-5 { animation-delay: -2s; }
+    .nn-6 { animation-delay: -2.5s; }
+    .nn-7 { animation-delay: -3s; }
+    .nn-8 { animation-delay: -3.5s; }
+    .nn-9 { animation-delay: -0.8s; }
+  }
+
+  @keyframes dashScroll {
+    0% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -56; }
+  }
+
+  @keyframes nodePulse {
+    0%, 100% {
+      opacity: 0.3;
+      r: inherit;
+    }
+    50% {
+      opacity: 0.7;
+      fill: rgba(192, 132, 252, 0.3);
+    }
   }
 
   .preview-inner {
@@ -65,6 +163,8 @@
     grid-template-columns: 1fr 1fr;
     gap: 80px;
     align-items: center;
+    position: relative;
+    z-index: 1;
   }
 
   .preview-text h2 {

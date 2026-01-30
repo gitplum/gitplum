@@ -19,6 +19,21 @@ const pillars = [
 ---
 
 <section class="thesis" id="thesis" aria-label="Why Gitplum exists">
+  <!-- Floating particles background -->
+  <div class="thesis-particles" aria-hidden="true">
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+    <div class="particle p5"></div>
+    <div class="particle p6"></div>
+    <div class="particle p7"></div>
+    <div class="particle p8"></div>
+    <div class="particle p9"></div>
+    <div class="particle p10"></div>
+    <div class="particle p11"></div>
+    <div class="particle p12"></div>
+  </div>
   <div class="thesis-inner">
     <div class="section-header fade-in">
       <div class="section-label">// the_thesis</div>
@@ -46,6 +61,66 @@ const pillars = [
     padding: 120px 24px;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── Floating Particles ── */
+  .thesis-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--plum-light);
+    box-shadow: 0 0 8px 2px rgba(139, 77, 171, 0.4), 0 0 20px 4px rgba(139, 77, 171, 0.15);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .particle {
+      animation: particleFloat ease-in-out infinite;
+    }
+
+    .p1  { width: 6px;  height: 6px;  left: 5%;   top: 18%;  animation-duration: 14s; animation-delay: 0s;   }
+    .p2  { width: 5px;  height: 5px;  left: 15%;  top: 55%;  animation-duration: 11s; animation-delay: -2s;  }
+    .p3  { width: 8px;  height: 8px;  left: 28%;  top: 12%;  animation-duration: 16s; animation-delay: -5s;  }
+    .p4  { width: 5px;  height: 5px;  left: 42%;  top: 72%;  animation-duration: 12s; animation-delay: -1s;  }
+    .p5  { width: 4px;  height: 4px;  left: 58%;  top: 8%;   animation-duration: 15s; animation-delay: -8s;  }
+    .p6  { width: 7px;  height: 7px;  left: 72%;  top: 45%;  animation-duration: 13s; animation-delay: -3s;  }
+    .p7  { width: 5px;  height: 5px;  left: 88%;  top: 22%;  animation-duration: 14s; animation-delay: -6s;  }
+    .p8  { width: 6px;  height: 6px;  left: 95%;  top: 65%;  animation-duration: 11s; animation-delay: -1s;  }
+    .p9  { width: 4px;  height: 4px;  left: 10%;  top: 82%;  animation-duration: 16s; animation-delay: -9s;  }
+    .p10 { width: 5px;  height: 5px;  left: 38%;  top: 38%;  animation-duration: 10s; animation-delay: -4s;  }
+    .p11 { width: 7px;  height: 7px;  left: 65%;  top: 85%;  animation-duration: 15s; animation-delay: -7s;  }
+    .p12 { width: 4px;  height: 4px;  left: 80%;  top: 30%;  animation-duration: 12s; animation-delay: -2s;  }
+  }
+
+  @keyframes particleFloat {
+    0%, 100% {
+      opacity: 0;
+      transform: translateY(0) translateX(0);
+    }
+    15% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 0.35;
+      transform: translateY(-50px) translateX(25px);
+    }
+    85% {
+      opacity: 0.55;
+    }
+  }
+
+  .thesis-inner {
+    position: relative;
+    z-index: 1;
   }
 
   .thesis h2 {
@@ -78,25 +153,10 @@ const pillars = [
     position: relative;
   }
 
-  .pillar::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: var(--radius-lg);
-    background: linear-gradient(135deg, var(--plum-light), var(--accent));
-    opacity: 0;
-    transition: opacity 0.35s ease;
-    z-index: -1;
-  }
-
   .pillar:hover {
-    border-color: transparent;
-    box-shadow: var(--shadow-lg);
+    border-color: var(--plum-light);
+    box-shadow: var(--shadow-lg), 0 0 0 1px rgba(139, 77, 171, 0.1);
     transform: translateY(-6px);
-  }
-
-  .pillar:hover::before {
-    opacity: 1;
   }
 
   .pillar-icon {
